@@ -1,1 +1,21 @@
 /* You can add global styles to this file, and also import other style files */
+body{
+    background: rgba(146,248,243,0.7);
+background: linear-gradient(60deg,rgba(243,170,234,0.8) 0%, rgba(146,248,243,0.7) 77%);
+background: -moz-linear-gradient(30deg,rgba(243,170,234,0.8) 0%, rgba(146,248,243,0.7) 77%);
+background: -webkit-linear-gradient(30deg,rgba(243,170,234,0.8) 0%, rgba(146,248,243,0.7) 77%);
+background: -o-linear-gradient(30deg,rgba(243,170,234,0.8) 0%, rgba(146,248,243,0.7) 77%);
+background: -ms-linear-gradient(30deg,rgba(243,170,234,0.8) 0%, rgba(146,248,243,0.7) 77%);
+filter:progid:DXImageTransform.Microsoft.gradient(GradientType=1,startColorstr="rgba(243,170,234,0.8)", endColorstr="rgba(146,248,243,0.7)");
+background-repeat: no-repeat;
+background-attachment: fixed;
+height: 1%;
+    margin: 0;
+}
+@font-face{
+    font-family: persian ;
+    src: url('/fonts/persian.woff2');
+}
+*{
+    font-family: persian;
+}
