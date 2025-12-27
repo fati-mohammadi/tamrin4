@@ -35,6 +35,7 @@ export class BooksService {
       this.data[index].writer=book.writer;
       this.data[index].publisher=book.publisher;
       this.data[index].price=book.price;
+      this.data[index].img=book.img;
 
 
      }

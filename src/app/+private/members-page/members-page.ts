@@ -9,12 +9,23 @@ import { FormsModule } from '@angular/forms';
   styleUrl: './members-page.css',
 })
 export class MembersPage implements OnInit {
+  action: string | undefined;
+  members: membersItem | undefined;
   
 
 
   save() {
-    const newItem = Object.assign({}, this.item);
-    this.membersService.add(this.item);
+    if(this.action=='add'){
+       const newItem = Object.assign({}, this.item);
+       this.membersService.add(this.item);
+    }
+    else if(this.action=='edit'){
+       this.membersService.update(this.item); 
+    }
+    else if(this.action=='remove'){
+      this.membersService.remove(this.item);
+    }
+   
     this.dataRefrsh();
     this.state = 'list';
 
@@ -37,6 +48,7 @@ export class MembersPage implements OnInit {
   }
   add() {
     this.state = 'add';
+    this.action = 'add';
     this.item = {
       id: 0,
       name: '',
@@ -49,6 +61,16 @@ export class MembersPage implements OnInit {
   cansel() {
     this.state = 'list';
   }
+   edit(members:membersItem){
+      this.state='form';
+      this.item={...members};
+      this.action='edit';
+    }
+     remove(members:membersItem){
+        this.state='form';
+        this.item={...members};
+        this.action='remove';
+      }
 }
 export interface membersItem {
   id: number;

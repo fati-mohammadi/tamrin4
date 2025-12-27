@@ -22,8 +22,8 @@
             <td>{{item.code}}</td>
             <td>{{item.phone}}</td>
             <td>
-                <button class="primary">ویرایش</button>
-                <button class="primary">حذف</button>
+                <button class="primary" (click)="edit(item)">ویرایش</button>
+                <button class="primary" (click)="remove(item)">حذف</button>
 
             </td>
 
@@ -33,27 +33,34 @@
     </tbody>
 </table>
 }
+
 @else {
+    @if(action=='remove'){
+        <div class="alert">
+      آیا از حذف این کتاب اطمینان دارید؟
+    </div>
+
+    }
 <form (ngSubmit)="save()">
     <div>
-        <input [(ngModel)]="item.id" id="id" name="id" type="number" placeholder="شناسه">
+        <input [class.makhfi]="action=='edit'" [disabled]="action=='edit' || action=='remove'"[(ngModel)]="item.id"[(ngModel)]="item.id" id="id" name="id" type="number" placeholder="شناسه">
     </div>
     <div>
-        <input [(ngModel)]="item.name" id="name" name="name" type="text" placeholder="نام">
+        <input  [disabled]="action=='remove'" [(ngModel)]="item.name" id="name" name="name" type="text" placeholder="نام">
     </div>
     <div>
-        <input [(ngModel)]="item.family" id="family" name="family" type="text" placeholder="نام خانوادگی">
+        <input  [disabled]="action=='remove'" [(ngModel)]="item.family" id="family" name="family" type="text" placeholder="نام خانوادگی">
 
     </div>
     <div>
-        <input [(ngModel)]="item.code" id="code" name="code" type="text" placeholder="کد ملی">
+        <input  [disabled]="action=='remove'" [(ngModel)]="item.code" id="code" name="code" type="text" placeholder="کد ملی">
     </div>
     <div>
-        <input [(ngModel)]="item.phone" id="phone" name="phone" type="number" placeholder="شماره تماس">
+        <input  [disabled]="action=='remove'" [(ngModel)]="item.phone" id="phone" name="phone" type="number" placeholder="شماره تماس">
     </div>
     <div>
         <button class="primary" type="submit">تایید</button>
-        <button (click)="cansel()" class="primary" type="submit">انصراف</button>
+        <button (click)="cansel()" class="primary" type="button">انصراف</button>
 
     </div>
 </form>

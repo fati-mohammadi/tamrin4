@@ -15,8 +15,24 @@ export class MembersService {
     list() {
       return [...this.data];
     }
-    add(item: membersItem) {
-      this.data.push(item);
-    }
+     add(members: membersItem) {
+      
+        members.id=Math.max(...this.data.map(m=>Number(m.id)))+1;
+    
+        this.data.push(members);
+      }
+      update(members:membersItem){
+         const index=this.data.findIndex(b=>b.id==members.id);
+         if(index!=-1){
+          this.data[index].name=members.name;
+          this.data[index].family=members.family;
+          this.data[index].code=members.code;
+          this.data[index].phone=members.phone;
+    
+    
+         }}
+         remove(members:membersItem) {
+             this.data=this.data.filter(m=>m.id!=members.id);
+           }
   
 }
