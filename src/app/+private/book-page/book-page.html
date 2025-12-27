@@ -14,18 +14,18 @@
         </tr>
     </thead>
     <tbody>
-        @for (item of data; track $index) {
+        @for (book of data; track $index) {
         <tr>
-            <td>{{item.id}}</td>
+            <td>{{book.id}}</td>
 
-            <td>{{item.title}}</td>
-            <td>{{item.writer}}</td>
-            <td>{{item.publisher}}</td>
-            <td>{{item.price}}</td>
-            <td><img [src]="item.img" alt="{{ item.title }}" width="100" class="img">
+            <td>{{book.title}}</td>
+            <td>{{book.writer}}</td>
+            <td>{{book.publisher}}</td>
+            <td>{{book.price}}</td>
+            <td><img [src]="book.img" alt="{{ item.title }}" width="100" class="img">
             <td>
-                <button class="primary">ویرایش</button>
-                <button class="primary">حذف</button>
+                <button class="primary" (click)="edit(book)">ویرایش</button>
+                <button class="primary" (click)="remove(book)">حذف</button>
 
             </td>
 
@@ -36,25 +36,33 @@
 </table>
 }
 @else {
+    @if(action=='remove'){
+        <div class="alert">
+      آیا از حذف این کتاب اطمینان دارید؟
+    </div>
+
+    }
+    
 <form (ngSubmit)="save()">
+        <div>
+        <input [class.makhfi]="action=='edit'" [disabled]="action=='edit' || action=='remove'"[(ngModel)]="item.id" id="id" name="id" type="number" placeholder="شناسه">
+    </div>
+
     <div>
-        <input [(ngModel)]="item.id" id="id" name="id" type="number" placeholder="شناسه">
+        <input [disabled]="action=='remove'" [(ngModel)]="item.title" id="title" name="title" type="text" placeholder="عنوان">
     </div>
     <div>
-        <input [(ngModel)]="item.title" id="title" name="title" type="text" placeholder="عنوان">
-    </div>
-    <div>
-        <input [(ngModel)]="item.writer" id="writer" name="writer" type="text" placeholder="نویسنده">
+        <input [disabled]="action=='remove'" [(ngModel)]="item.writer" id="writer" name="writer" type="text" placeholder="نویسنده">
 
     </div>
     <div>
-        <input [(ngModel)]="item.publisher" id="publisher" name="publisher" type="text" placeholder="ناشر">
+        <input [disabled]="action=='remove'" [(ngModel)]="item.publisher" id="publisher" name="publisher" type="text" placeholder="ناشر">
     </div>
     <div>
-        <input [(ngModel)]="item.price" id="price" name="price" type="number" placeholder="قیمت">
+        <input [disabled]="action=='remove'" [(ngModel)]="item.price" id="price" name="price" type="number" placeholder="قیمت">
     </div>
     <div>
-        <input [(ngModel)]="item.img" id="img" name="img" type="text" placeholder="تصویر">
+        <input [disabled]="action=='remove'" [(ngModel)]="item.img" id="img" name="img" type="text" placeholder="تصویر">
     </div>
     <div>
         <button class="primary" type="submit">تایید</button>
